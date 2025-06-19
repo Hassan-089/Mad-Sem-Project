@@ -11,8 +11,10 @@ import {
   RefreshControl
 } from 'react-native';
 import * as Location from 'expo-location';
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -174,6 +176,13 @@ export default function HomeScreen() {
         >
           <Text style={styles.refreshButtonText}>Refresh Location</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={[styles.refreshButton, styles.masjidButton]}
+          onPress={() => navigation.navigate('MasjidList')}
+        >
+          <Text style={styles.refreshButtonText}>View Nearby Masjids</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -240,5 +249,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
+  },
+  masjidButton: {
+    backgroundColor: '#2196F3',
+    marginTop: 15,
   },
 });
